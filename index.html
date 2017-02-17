@@ -15,16 +15,26 @@
 
   <body>
 
-   <div class ="menu">
+	<ul id="menu-bar">
+	 <li class="active"><a href="index.html">Home</a></li>
+	 <li><a href="#"><img src="img/account.png" width=75 height=75 title="Account"></img></a>
 	  <ul>
-		<li><a href="index.html">Account</a></li>
-		<li><a href="documentation.html">Controllers</a></li>
+	   <li><div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div></li>
+		<li><a href="#" onclick="signOut();">Sign out</a></li>
 	  </ul>
-	</div>
-
-    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-
-	<a href="#" onclick="signOut();">Sign out</a>
+	 </li>
+	 <li><a href="#"><img src="img/controller.png" width=75 height=75 title="Controller"></img></a>
+	  <ul>
+	   <li><a href="#">Controller 1</a></li>
+	  </ul>
+	 </li>
+	 <li><a href="#">About</a></li>
+	 <li><a href="#">Contact Us</a></li>
+	</ul>
 		
+		
+		
+
+		 
   </body>
 </html>
