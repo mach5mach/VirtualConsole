@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$dbhost = "/cloudsql/documentation-1213:documentationsql1";
-$dbuser = "root";
-$dbpass = "H0tD0gs!";
-$dbname = "documentationdb";
+$dbhost = "localhost";
+$dbuser = "virtualconsole";
+$dbpass = "virtualconsole";
+$dbname = "virtualconsole";
 $dbcon = null;
 
 try
@@ -38,5 +38,5 @@ catch(PDOException $e)
 }
 
 
-include_once 'class.user.php';
-$user = new user($dbcon);
+// include_once 'class.user.php';
+// $user = new user($dbcon);

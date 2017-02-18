@@ -37,6 +37,16 @@
 
   	function onLogin(email) {
   		//log in with email account
+  		var xhr = new XMLHttpRequest();
+		xhr.open('POST', './php/login.php');
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onload = function() {
+		  var response = JSON.parse(xhr.responseText);
+
+		};
+		xhr.send('email=' + email);
+  		//if email does not exist in database, check if it's linked with a current email
+  		//else add email to database and continue with check in
 		
 		//load account settings
 
