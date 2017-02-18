@@ -17,6 +17,13 @@
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.onload = function() {
 		  console.log('Signed in as: ' + xhr.responseText);
+		  var response = JSON.parse(xhr.responseText);
+
+		  if(response.aud.includes(CLIENT_ID))
+		  {
+		  	//good to go with Gooogle
+		  	onLogin(response.email);
+		  }
 		};
 		xhr.send('id_token=' + id_token);
 	  };
@@ -27,3 +34,12 @@
 		  console.log('User signed out.');
 		});
 	  }
+
+  	function onLogin(email) {
+  		//log in with email account
+		
+		//load account settings
+
+		//change menu
+			
+  	}
