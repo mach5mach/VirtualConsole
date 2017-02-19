@@ -10,6 +10,9 @@
           $stmt = $dbcon->prepare($sqlstatement);
           $stmt->execute(array(':email'=>$email));
           $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+          //if email does not exist in database, check if it's linked with a current email
+  		    //else add email to database and continue with check in
           if($stmt->rowCount() > 0)
           {
               //email exists
