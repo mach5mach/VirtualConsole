@@ -8,11 +8,11 @@ function connecthandler(e) {
 function addgamepad(gamepad) {
   controllers[gamepad.index] = gamepad;
 
-  var controllerlist = document.getElementById("controllerlist");
+  var menu = document.getElementById("menu-bar");
 
-  var d = document.createElement("div");
-  d.setAttribute("id", "controller" + gamepad.index);
-  d.innerHTML = gamepad.id;
+//   var d = document.createElement("div");
+//   d.setAttribute("id", "controller" + gamepad.index);
+//   d.innerHTML = gamepad.id;
 
 //   var t = document.createElement("h1");
 //   t.appendChild(document.createTextNode("gamepad: " + gamepad.id));
@@ -45,9 +45,21 @@ function addgamepad(gamepad) {
 
 //   d.appendChild(a);
 
+  //create controller id on main menu
   var li = document.createElement("li");
-  li.appendChild(d);
-  controllerlist.appendChild(li);
+  var a = document.createElement("a");
+  a.setAttribute("href", "#");
+  li.appendChild(a);
+
+  var img = document.createElement("img");
+  img.setAttribute("src", "img/controller.png");
+  img.setAttribute("width", "75");
+  img.setAttribute("height", "75");
+  img.setAttribute("title", "controller" + gamepad.index);
+  img.setAttribute("id", "controller" + gamepad.index);
+  a.appendChild(img);
+
+  menu.appendChild(li);
   
   requestAnimationFrame(updateStatus);
 }
@@ -58,7 +70,7 @@ function disconnecthandler(e) {
 
 function removegamepad(gamepad) {
   var d = document.getElementById("controller" + gamepad.index);
-  d.parentNode.removeChild(d);
+  d.parentNode.parentNode.parentNode.removeChild(d.parentNode.parentNode);
   delete controllers[gamepad.index];
 }
 
