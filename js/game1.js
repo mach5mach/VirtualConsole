@@ -21,6 +21,35 @@ function game1() {
         cube.rotation.x += 0.1;
         cube.rotation.y += 0.1;
 
+        //controller test
+        if(platform.controllers[0])
+        {
+            //L joystick
+            if(platform.controllers[0].axes[0] > 0.1 || platform.controllers[0].axes[0] < -0.1)
+            {
+                cube.applyMatrix( new THREE.Matrix4().makeTranslation(platform.controllers[0].axes[0], 0, 0) );
+            }
+            if(platform.controllers[0].axes[1] > 0.1 || platform.controllers[0].axes[1] < -0.1)
+            {
+                cube.applyMatrix( new THREE.Matrix4().makeTranslation(0, -platform.controllers[0].axes[1], 0) );
+            }
+            //R joystick
+            if(platform.controllers[0].axes[2] > 0.1 || platform.controllers[0].axes[2] < -0.1)
+            {
+                cube.applyMatrix( new THREE.Matrix4().makeTranslation(platform.controllers[0].axes[2], 0, 0) );
+            }
+            if(platform.controllers[0].axes[3] > 0.1 || platform.controllers[0].axes[3] < -0.1)
+            {
+                cube.applyMatrix( new THREE.Matrix4().makeTranslation(0, -platform.controllers[0].axes[3], 0) );
+            }
+            
+        }
+        //if dpad/joystick moves
+//         if()
+//         {
+//             //move object
+//         }
+
         renderer.render(scene, camera);
     };
 

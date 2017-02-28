@@ -1,12 +1,14 @@
 var haveEvents = 'ongamepadconnected' in window;
-var controllers = {};
-
-function connecthandler(e) {
-  addgamepad(e.gamepad);
+if (!haveEvents) {
+  setInterval(scan, 500);
 }
 
-function addgamepad(gamepad) {
-  controllers[gamepad.index] = gamepad;
+function connecthandler(e) {
+  add(e.gamepad);
+}
+
+function add(gamepad) {
+  platform.controllers[gamepad.index] = gamepad;
 
   var menu = document.getElementById("menu-bar");
 
@@ -61,22 +63,22 @@ function addgamepad(gamepad) {
 
   menu.appendChild(li);
   
-  requestAnimationFrame(updateStatus);
+  requestAnimationFrame(this.update);
 }
 
 function disconnecthandler(e) {
-  removegamepad(e.gamepad);
+  remove(e.gamepad);
 }
 
-function removegamepad(gamepad) {
+function remove(gamepad) {
   var d = document.getElementById("controller" + gamepad.index);
   d.parentNode.parentNode.parentNode.removeChild(d.parentNode.parentNode);
-  delete controllers[gamepad.index];
+  delete platform.controllers[gamepad.index];
 }
 
-function updateStatus() {
+function update() {
   if (!haveEvents) {
-    scangamepads();
+    scan();
   }
 
   var i = 0;
@@ -114,26 +116,26 @@ function updateStatus() {
 //     }
 //   }
 
-  requestAnimationFrame(updateStatus);
+  requestAnimationFrame(update);
 }
 
-function scangamepads() {
+function scan() {
   var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads() : []);
   for (var i = 0; i < gamepads.length; i++) {
     if (gamepads[i]) {
-      if (gamepads[i].index in controllers) {
-        controllers[gamepads[i].index] = gamepads[i];
+      if (gamepads[i].index in platform.controllers) {
+        platform.controllers[gamepads[i].index] = gamepads[i];
       } else {
-        addgamepad(gamepads[i]);
+        add(gamepads[i]);
       }
     }
   }
-  for(var i in controllers)
+  for(var i in platform.controllers)
   {
-    var controller = controllers[i];
+    var controller = platform.controllers[i];
       if(gamepads[controller.index] == null)
       {
-        removegamepad(controller);
+        remove(controller);
       }
     
   }
@@ -145,6 +147,6 @@ function scangamepads() {
 // window.addEventListener("gamepadconnected", connecthandler);
 // window.addEventListener("gamepaddisconnected", disconnecthandler);
 
-if (!haveEvents) {
-  setInterval(scangamepads, 500);
-}
+
+
+
